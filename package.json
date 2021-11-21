@@ -1,0 +1,9 @@
+{
+  "name": "site-generator-vue",
+  "description": "静态页面生成器",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ChenGuanglin0924/site-generator-vue.git",
+  "author": "GarasChan <diyad7299@qq.com>",
+  "license": "MIT"
+}
