@@ -1,17 +1,14 @@
 {
-  "name": "site-generator-vue",
-  "description": "静态页面生成器",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/ChenGuanglin0924/site-generator-vue.git",
-  "author": "GarasChan <diyad7299@qq.com>",
-  "license": "MIT",
+  "private": true,
   "scripts": {
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "start": "node .output/server/index.mjs"
   },
   "devDependencies": {
-    "typescript": "^4.5.2",
-    "vuepress": "^2.0.0-beta.27"
+    "nuxt3": "latest"
+  },
+  "dependencies": {
+    "ant-design-vue": "^2.2.8"
   }
 }

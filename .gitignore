@@ -1,4 +1,6 @@
 node_modules
-yarn.lock
-.temp
-.cache
+*.log
+.nuxt
+nuxt.d.ts
+.output
+.env
