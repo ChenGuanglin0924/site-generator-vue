@@ -1,98 +1,38 @@
 <template>
-  <div>
-      <ClientOnly>
-      <a-upload
-      v-model:file-list="fileList"
-      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-      list-type="picture"
-    >
-      <a-button>
-        <upload-outlined></upload-outlined>
-        upload
-      </a-button>
-    </a-upload>
-    <br />
-    <br />
-    <a-upload
-      v-model:file-list="fileList1"
-      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-      list-type="picture"
-      class="upload-list-inline"
-    >
-      <a-button>
-        upload
-      </a-button>
-    </a-upload>
-    </ClientOnly>
-    
-  </div>
+  <div><a-upload-dragger
+    name="file"
+    @change="handleChange"
+  >
+    <p class="ant-upload-drag-icon">
+      <a-icon type="inbox" />
+    </p>
+    <p class="ant-upload-text">
+      Click or drag file to this area to upload
+    </p>
+    <p class="ant-upload-hint">
+      Support for a single or bulk upload. Strictly prohibit from uploading company data or other
+      band files
+    </p>
+  </a-upload-dragger>
+  <a-button>点击</a-button></div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-
-interface FileItem {
-  uid: string;
-  name?: string;
-  status?: string;
-  response?: string;
-  url?: string;
-  thumbUrl?: string;
-}
-
-export default defineComponent({
-  components: {
+<script>
+export default {
+  data() {
+    return {};
   },
-  setup() {
-    const fileList = ref<FileItem[]>([
-      {
-        uid: '-1',
-        name: 'xxx.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-        thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      },
-      {
-        uid: '-2',
-        name: 'yyy.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-        thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      },
-    ]);
-    const fileList1 = ref<FileItem[]>([
-      {
-        uid: '-1',
-        name: 'xxx.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-        thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      },
-      {
-        uid: '-2',
-        name: 'yyy.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-        thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      },
-    ]);
-    return {
-      fileList,
-      fileList1,
-    };
+  methods: {
+    handleChange(info) {
+      const status = info.file.status;
+      if (status !== 'uploading') {
+        console.log(info.file, info.fileList);
+      }
+      if (status === 'done') {
+        this.$message.success(`${info.file.name} file uploaded successfully.`);
+      } else if (status === 'error') {
+        this.$message.error(`${info.file.name} file upload failed.`);
+      }
+    },
   },
-});
+};
 </script>
-<style scoped>
-/* tile uploaded pictures */
-.upload-list-inline :deep(.ant-upload-list-item) {
-  float: left;
-  width: 200px;
-  margin-right: 8px;
-}
-.upload-list-inline :deep(.ant-upload-animate-enter) {
-  animation-name: uploadAnimateInlineIn;
-}
-.upload-list-inline :deep(.ant-upload-animate-leave) {
-  animation-name: uploadAnimateInlineOut;
-}
-</style>
